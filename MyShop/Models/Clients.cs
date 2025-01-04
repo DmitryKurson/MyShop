@@ -1,7 +1,9 @@
-﻿namespace MyShop.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace MyShop.Models
 {
     public class Clients
     {
+        [Key]
         public int id { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }

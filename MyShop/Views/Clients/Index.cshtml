@@ -1,0 +1,75 @@
+﻿@using MyShop.Models
+
+
+<h1>Список клієнтів</h1><br>
+
+<a asp-controller="Clients" asp-action="Create">Додати клієнта</a>
+
+<form method="get">
+
+</form>
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Index">Id</a>
+        </th>
+        <th>
+            <a asp-action="Index">Name</a>
+        </th>
+        <th>
+            <a asp-action="Index">Lastname</a>
+        </th>
+        <th>
+            <a asp-action="Index">Email</a>
+        </th>
+        <th>
+            <a asp-action="Index">adress</a>
+        </th>
+        <th>
+            <a asp-action="Index">Phone number</a>
+        </th>
+        <th>
+            <a asp-action="Index">Orders</a>
+        </th>
+
+    </tr>
+
+
+    @foreach (var client in Model)
+    {
+        <tr>
+            <td>@client.id</td>
+            <td>@client.name</td>
+            <td>@client.lastname</td>
+            <td>@client.email</td>
+            <td>@client.adress</td>
+            <td>@client.phone_number</td>
+            @if (@client.orders != null)
+            {
+                @foreach (var order in @client.orders)
+                {
+                    <td>@order.id </td>
+                }
+            }
+            else
+            {
+             
+                <td>Замовлень ще немає</td>
+            }
+            
+            <td>
+                <form asp-controller="Clients" asp-action="Edit" asp-route-id="@client.id">
+                    <input type="submit" value="Редагувати"></input>
+                </form>
+                
+            </td>
+            <td>
+                <form asp-controller="Clients" asp-action="Delete" asp-route-id="@client.id">
+                    <input type="submit" value="Видалити"></input>
+                </form>
+            </td>
+            <!--TODO ORDERS-->
+        </tr>
+    }
+</table>

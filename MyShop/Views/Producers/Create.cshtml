@@ -1,0 +1,34 @@
+﻿@model MyShop.Models.Clients
+
+
+<h2> Зареєструватися </h2>
+
+<form asp-action="create" asp-controller="client">
+
+    <p>
+        <label asp-for="id">Id</label><br />
+        <input type="text" asp-for="id" />
+    </p>
+     <p>
+        <label asp-for="name">Ім'я'</label><br />
+        <input type="text" asp-for="name" />
+    </p>
+    <p>
+        <label asp-for="lastname">Прізвище</label><br />
+        <input type="text" asp-for="lastname" />
+    </p>
+    <p>
+        <label asp-for="email">email</label><br />
+        <input type="text" asp-for="email" />
+    </p>
+    <p>
+        <label asp-for="adress">Адреса</label><br />
+        <input type="text" asp-for="adress" />
+    </p>
+    <p>
+        <label asp-for="phone_number">Номер телефону</label><br />
+        <input type="text" asp-for="phone_number" />
+    </p>
+
+
+</form>
