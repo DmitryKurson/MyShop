@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace MyShop.Models
 {
-    public class Clients
+    public class Client
     {
         [Key]
         public int id { get; set; }
@@ -10,6 +10,6 @@ namespace MyShop.Models
         public string email { get; set; }
         public string adress { get; set; }
         public string phone_number { get; set; }
-        public List<Orders> orders { get; set; }
+        public List<Order> orders { get; set; }
     }
 }

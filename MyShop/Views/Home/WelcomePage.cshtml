@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h2></h2>
+    <form asp-controller="goods" asp-action="index_u"> 
+        <input type="submit" value="Увійти як користувач" />
+    </form>
+
+    <form asp-controller="home" asp-action="WelcomePageAdmin">
+        <input type="submit" value="Увійти як адміністратор" />
+    </form>
+   
+</div>

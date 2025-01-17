@@ -1,0 +1,212 @@
+﻿@using MyShop.Models
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Список товарів</h1>
+<br>
+
+<a asp-controller="goods" asp-action="create">Додати товар</a>
+
+<form method="get">
+</form>
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Index">Id</a>
+        </th>
+        <th>
+            <a asp-action="Index">Title</a>
+        </th>
+        <th>
+            <a asp-action="Index">description</a>
+        </th>
+        <th>
+            <a asp-action="Index">category</a>
+        </th>
+        <th>
+            <a asp-action="Index">adress</a>
+        </th>
+        <th>
+            <a asp-action="Index">Phone number</a>
+        </th>
+        <th>
+            <a asp-action="Index">Orders</a>
+        </th>
+
+    </tr>
+
+
+    @foreach (var goods in Model)
+    {
+        <tr>
+            <td>@goods.id</td>
+            <td>@goods.title</td>
+            <td>@goods.description</td>
+            <td>@goods.category</td>
+            <td>@goods.producer</td>
+            <td>@goods.price</td>
+            @if (goods.orders != null)
+            {
+                @foreach (var order in goods.orders)
+                {
+                    <td>@order.id </td>
+                }
+            }
+            else
+            {
+                <td>Замовлень ще немає</td>
+            }
+
+            <td>
+                <form asp-controller="goods" asp-action="edit" asp-route-id="@goods.id">
+                    <input type="submit" value="Редагувати"></input>
+                </form>
+
+            </td>
+            <td>
+                <form asp-controller="goods" asp-action="delete" asp-route-id="@goods.id">
+                    <input type="submit" value="Видалити"></input>
+                </form>
+            </td>
+            <!--TODO ORDERS-->
+        </tr>
+    }
+</table>
+
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список виробників</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .manufacturer {
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .manufacturer h2 {
+                margin-bottom: 1rem;
+                color: #00aaff;
+            }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .product {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            flex: 1 1 calc(25% - 1rem);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+            .product img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            .product h3 {
+                margin: 0.5rem 0;
+                font-size: 1.2rem;
+            }
+
+            .product p {
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+            .product:hover {
+                transform: scale(1.05);
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="manufacturer">
+            <h2>Категорія: Apple</h2>    <!-- category   !-->
+            <div class="product-list">
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="iPhone 14">
+                    <h3>iPhone 14</h3>                      <!--  title   !-->
+                    <p>Техніка</p>                          <!-- category   !-->
+                    <p>Смартфон нового покоління.</p>       <!-- description   !-->
+                    <p>Смартфон нового покоління.</p>       <!-- price   !-->
+                </div>
+
+
+
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="MacBook Air">
+                    <h3>MacBook Air</h3>
+                    <p>Легкий та потужний ноутбук.</p>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="Apple Watch">
+                    <h3>Apple Watch</h3>
+                    <p>Інтелектуальний годинник.</p>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="AirPods">
+                    <h3>AirPods</h3>
+                    <p>Бездротові навушники.</p>
+                </div>
+            </div>
+        </div>
+        <div class="manufacturer">
+            <h2>Виробник: Samsung</h2>
+            <div class="product-list">
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="Galaxy S23">
+                    <h3>Galaxy S23</h3>
+                    <p>Потужний флагман.</p>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="Galaxy Tab">
+                    <h3>Galaxy Tab</h3>
+                    <p>Багатофункціональний планшет.</p>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="Galaxy Watch">
+                    <h3>Galaxy Watch</h3>
+                    <p>Смарт-годинник.</p>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/150" alt="Galaxy Buds">
+                    <h3>Galaxy Buds</h3>
+                    <p>Якісні навушники.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+}

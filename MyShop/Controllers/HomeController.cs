@@ -13,7 +13,12 @@ namespace MyShop.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult WelcomePage()
+        {
+            return View();
+        }
+
+        public IActionResult WelcomePageAdmin()
         {
             return View();
         }

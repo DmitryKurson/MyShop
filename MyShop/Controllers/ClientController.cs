@@ -1,22 +1,21 @@
-﻿using Azure.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Data;
 using MyShop.Models;
 
 namespace MyShop.Controllers
 {
-    public class ClientsController : Controller
+    public class ClientController : Controller
     {
         MyShopDBContext db;
-        public ClientsController(MyShopDBContext context)
+        public ClientController(MyShopDBContext context)
         {
             db = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index_A()
         {
-            List<Clients> clients = await db.clients.ToListAsync();
+            List<Client> clients = await db.client.ToListAsync();
             return View(clients);
         }
 
@@ -26,17 +25,17 @@ namespace MyShop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Clients clients)
+        public async Task<IActionResult> Create(Client clients)
         {
-            db.clients.Add(clients);
+            db.client.Add(clients);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditPost(Clients clients)
+        public async Task<IActionResult> EditPost(Client clients)
         {
-            db.clients.Update(clients);
+            db.client.Update(clients);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -46,7 +45,7 @@ namespace MyShop.Controllers
         {
             if (id != null)
             {
-                Clients? client = await db.clients.FirstOrDefaultAsync(c => c.id == id);
+                Client? client = await db.client.FirstOrDefaultAsync(c => c.id == id);
                 if (client != null)
                 {
                     return View(client);
@@ -62,10 +61,10 @@ namespace MyShop.Controllers
         {
             if (id != null)
             {
-                Clients? client = await db.clients.FirstOrDefaultAsync(c => c.id == id);
+                Client? client = await db.client.FirstOrDefaultAsync(c => c.id == id);
                 if (client != null)
                 {
-                    db.clients.Remove(client);
+                    db.client.Remove(client);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }

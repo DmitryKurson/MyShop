@@ -1,9 +1,11 @@
 ﻿@using MyShop.Models
-
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
 <h1>Список клієнтів</h1><br>
 
-<a asp-controller="Clients" asp-action="Create">Додати клієнта</a>
+<a asp-controller="client" asp-action="create">Додати клієнта</a>
 
 <form method="get">
 
@@ -59,13 +61,13 @@
             }
             
             <td>
-                <form asp-controller="Clients" asp-action="Edit" asp-route-id="@client.id">
+                <form asp-controller="Client" asp-action="Edit" asp-route-id="@client.id">
                     <input type="submit" value="Редагувати"></input>
                 </form>
                 
             </td>
             <td>
-                <form asp-controller="Clients" asp-action="Delete" asp-route-id="@client.id">
+                <form asp-controller="Client" asp-action="Delete" asp-route-id="@client.id">
                     <input type="submit" value="Видалити"></input>
                 </form>
             </td>

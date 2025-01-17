@@ -10,8 +10,8 @@
         public int price { get; set; }
 
         public int ProdusersId { get; set; }
-        public Producers Producer { get; set; }
+        public Producer Producer { get; set; }
 
-        public List<Orders> Orders { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

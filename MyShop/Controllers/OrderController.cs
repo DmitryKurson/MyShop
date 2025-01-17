@@ -2,7 +2,7 @@
 
 namespace MyShop.Controllers
 {
-    public class OrdersController : Controller
+    public class OrderController : Controller
     {
         public IActionResult Index()
         {

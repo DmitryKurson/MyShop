@@ -5,10 +5,10 @@ namespace MyShop.Data
 {
     public class MyShopDBContext : DbContext
     {
-        public DbSet<Clients> clients { get; set; }
-        public DbSet<Producers> producers { get; set; }
+        public DbSet<Client> client { get; set; }
+        public DbSet<Producer> producer { get; set; }
         public DbSet<Goods> goods { get; set; }
-        public DbSet<Orders> orders { get; set; }
+        public DbSet<Order> order { get; set; }
 
         public MyShopDBContext(DbContextOptions<MyShopDBContext> options)
           : base(options)
@@ -28,7 +28,7 @@ namespace MyShop.Data
                 .HasForeignKey(g => g.ProdusersId);
 
             // Client-Orders
-            modelBuilder.Entity<Orders>()
+            modelBuilder.Entity<Order>()
                 .HasOne(o => o.client)
                 .WithMany(c => c.orders)
                 .HasForeignKey(o => o.ClientId);

@@ -1,11 +1,18 @@
-﻿@model MyShop.Models.Clients
-
+﻿@model MyShop.Models.Client
+@{
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
 
 <h2> Зареєструватися </h2>
 
-<form asp-action="create" asp-controller="clients">
+<form asp-action="create" asp-controller="client">
+
+    <p>
+        <label asp-for="id">Id</label><br />
+        <input type="text" asp-for="id" />
+    </p>
      <p>
-        <label asp-for="name">Ім'я</label><br />
+        <label asp-for="name">Ім'я'</label><br />
         <input type="text" asp-for="name" />
     </p>
     <p>
@@ -13,7 +20,7 @@
         <input type="text" asp-for="lastname" />
     </p>
     <p>
-        <label asp-for="email">Email</label><br />
+        <label asp-for="email">email</label><br />
         <input type="text" asp-for="email" />
     </p>
     <p>
@@ -24,11 +31,6 @@
         <label asp-for="phone_number">Номер телефону</label><br />
         <input type="text" asp-for="phone_number" />
     </p>
-    <p>
-        <input type="submit" value="Зберегти" />
-    </p>
-</form>
 
-<form asp-action="index" asp-controller="clients">
-    <input type="submit" value="Назад" />
+
 </form>

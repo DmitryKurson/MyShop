@@ -1,6 +1,6 @@
 ﻿namespace MyShop.Models
 {
-    public class Producers
+    public class Producer
     {
         public int id { get; set; }
         public string title { get; set; }

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Clients\DeleteConfirmation.cshtml" />
+    <Content Remove="Views\Client\DeleteConfirmation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,15 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Clients\DeleteConfirmation.cshtml" />
+    <UpToDateCheckInput Remove="Views\Client\DeleteConfirmation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Clients\DeleteConfirmation.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Client\DeleteConfirmation.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Clients\DeleteConfirmation.cshtml" />
+    <None Include="Views\Client\DeleteConfirmation.cshtml" />
   </ItemGroup>
 
 </Project>

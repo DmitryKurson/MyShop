@@ -1,34 +1,31 @@
-﻿@model MyShop.Models.Clients
-
-
-<h2> Зареєструватися </h2>
-
-<form asp-action="create" asp-controller="client">
+﻿@model MyShop.Models.Goods
+<h2> Додати товар </h2>
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<form asp-action="create" asp-controller="goods">
 
     <p>
-        <label asp-for="id">Id</label><br />
-        <input type="text" asp-for="id" />
-    </p>
-     <p>
-        <label asp-for="name">Ім'я'</label><br />
-        <input type="text" asp-for="name" />
+        <label asp-for="title">Назва</label><br />
+        <input type="text" asp-for="title" />
     </p>
     <p>
-        <label asp-for="lastname">Прізвище</label><br />
-        <input type="text" asp-for="lastname" />
+         <label asp-for="description">Опис</label><br />
+         <input type="text" asp-for="description" />
     </p>
     <p>
-        <label asp-for="email">email</label><br />
-        <input type="text" asp-for="email" />
+        <label asp-for="category">Категорія</label><br />
+        <input type="text" asp-for="category" />
     </p>
     <p>
-        <label asp-for="adress">Адреса</label><br />
-        <input type="text" asp-for="adress" />
+        <label asp-for="producer">Виробник</label><br />
+        <input type="text" asp-for="producer" />
     </p>
     <p>
-        <label asp-for="phone_number">Номер телефону</label><br />
-        <input type="text" asp-for="phone_number" />
+        <input type="submit" value="Зберегти" />
     </p>
+</form>
 
-
+<form asp-action="index" asp-controller="goods">
+    <input type="submit" value="Назад" />
 </form>
