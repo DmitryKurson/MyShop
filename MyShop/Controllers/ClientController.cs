@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Data;
 using MyShop.Models;
@@ -20,7 +21,7 @@ namespace MyShop.Controllers
         }
 
         public IActionResult Create()
-        {
+        {           
             return View();
         }
 

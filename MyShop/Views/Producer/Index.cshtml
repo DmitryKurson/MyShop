@@ -1,3 +1,67 @@
-﻿@{
+﻿@using MyShop.Models
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+<h1>Список виробників</h1>
+<br>
+
+<a asp-controller="producer" asp-action="create">Додати виробника</a>
+
+<form method="get">
+</form>
+
+<table>
+    <tr>
+        <th>
+            <a asp-action="Index">Id</a>
+        </th>
+        <th>
+            <a asp-action="Index">Назва</a>
+        </th>
+        <th>
+            <a asp-action="Index">Країна</a>
+        </th>
+        <th>
+            <a asp-action="Index">Номер телефону</a>
+        </th>
+        <th>
+            <a asp-action="Index">Товари</a>
+        </th>
+
+    </tr>
+
+
+    @foreach (var producer in Model)
+    {
+        <tr>
+            <td>@producer.id</td>
+            <td>@producer.title</td>
+            <td>@producer.country</td>
+            <td>@producer.phone_number</td>
+            @if (producer.goods != null)
+            {
+                @foreach (var goods in producer.goods)
+                {
+                    <td>@goods.id </td>
+                }
+            }
+            else
+            {
+                <td>Товарів ще немає</td>
+            }
+
+            <td>
+                <form asp-controller="producer" asp-action="edit" asp-route-id="@producer.id">
+                    <input type="submit" value="Редагувати"></input>
+                </form>
+
+            </td>
+            <td>
+                <form asp-controller="producer" asp-action="delete" asp-route-id="@producer.id">
+                    <input type="submit" value="Видалити"></input>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

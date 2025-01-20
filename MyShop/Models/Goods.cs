@@ -6,7 +6,7 @@
         public string title { get; set; }
         public string description { get; set; }
         public string category { get; set; }
-        public string producer { get; set; }
+        //public string producer { get; set; }
         public int price { get; set; }
 
         public int ProdusersId { get; set; }
