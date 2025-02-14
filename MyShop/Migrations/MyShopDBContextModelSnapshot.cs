@@ -21,22 +21,7 @@ namespace MyShop.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GoodsOrders", b =>
-                {
-                    b.Property<int>("Ordersid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("goodsid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Ordersid", "goodsid");
-
-                    b.HasIndex("goodsid");
-
-                    b.ToTable("GoodsOrders");
-                });
-
-            modelBuilder.Entity("MyShop.Models.Clients", b =>
+            modelBuilder.Entity("MyShop.Models.Client", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -66,47 +51,10 @@ namespace MyShop.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("clients");
+                    b.ToTable("client");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Goods", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int>("ProdusersId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("category")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("price")
-                        .HasColumnType("int");
-
-                    b.Property<string>("producer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("ProdusersId");
-
-                    b.ToTable("goods");
-                });
-
-            modelBuilder.Entity("MyShop.Models.Orders", b =>
+            modelBuilder.Entity("MyShop.Models.Order", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -125,10 +73,10 @@ namespace MyShop.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("orders");
+                    b.ToTable("order");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Producers", b =>
+            modelBuilder.Entity("MyShop.Models.Producer", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -150,38 +98,60 @@ namespace MyShop.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("producers");
+                    b.ToTable("producer");
                 });
 
-            modelBuilder.Entity("GoodsOrders", b =>
+            modelBuilder.Entity("MyShop.Models.Product", b =>
                 {
-                    b.HasOne("MyShop.Models.Orders", null)
-                        .WithMany()
-                        .HasForeignKey("Ordersid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("MyShop.Models.Goods", null)
-                        .WithMany()
-                        .HasForeignKey("goodsid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ProducerId");
+
+                    b.ToTable("product");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Goods", b =>
+            modelBuilder.Entity("MyShop.Models.ProductOrder", b =>
                 {
-                    b.HasOne("MyShop.Models.Producers", "Producer")
-                        .WithMany("goods")
-                        .HasForeignKey("ProdusersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Navigation("Producer");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductOrder");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Orders", b =>
+            modelBuilder.Entity("MyShop.Models.Order", b =>
                 {
-                    b.HasOne("MyShop.Models.Clients", "client")
+                    b.HasOne("MyShop.Models.Client", "client")
                         .WithMany("orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -190,14 +160,54 @@ namespace MyShop.Migrations
                     b.Navigation("client");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Clients", b =>
+            modelBuilder.Entity("MyShop.Models.Product", b =>
+                {
+                    b.HasOne("MyShop.Models.Producer", "Producer")
+                        .WithMany("products")
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producer");
+                });
+
+            modelBuilder.Entity("MyShop.Models.ProductOrder", b =>
+                {
+                    b.HasOne("MyShop.Models.Order", "Order")
+                        .WithMany("ProductOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyShop.Models.Product", "Product")
+                        .WithMany("ProductOrders")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MyShop.Models.Client", b =>
                 {
                     b.Navigation("orders");
                 });
 
-            modelBuilder.Entity("MyShop.Models.Producers", b =>
+            modelBuilder.Entity("MyShop.Models.Order", b =>
                 {
-                    b.Navigation("goods");
+                    b.Navigation("ProductOrders");
+                });
+
+            modelBuilder.Entity("MyShop.Models.Producer", b =>
+                {
+                    b.Navigation("products");
+                });
+
+            modelBuilder.Entity("MyShop.Models.Product", b =>
+                {
+                    b.Navigation("ProductOrders");
                 });
 #pragma warning restore 612, 618
         }

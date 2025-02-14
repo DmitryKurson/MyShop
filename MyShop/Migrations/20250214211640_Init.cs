@@ -5,13 +5,13 @@
 namespace MyShop.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "clients",
+                name: "client",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -24,11 +24,11 @@ namespace MyShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_clients", x => x.id);
+                    table.PrimaryKey("PK_client", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "producers",
+                name: "producer",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -39,11 +39,11 @@ namespace MyShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_producers", x => x.id);
+                    table.PrimaryKey("PK_producer", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "orders",
+                name: "order",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -53,17 +53,17 @@ namespace MyShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_orders", x => x.id);
+                    table.PrimaryKey("PK_order", x => x.id);
                     table.ForeignKey(
-                        name: "FK_orders_clients_ClientId",
+                        name: "FK_order_client_ClientId",
                         column: x => x.ClientId,
-                        principalTable: "clients",
+                        principalTable: "client",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "goods",
+                name: "product",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -71,78 +71,77 @@ namespace MyShop.Migrations
                     title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    producer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     price = table.Column<int>(type: "int", nullable: false),
-                    ProdusersId = table.Column<int>(type: "int", nullable: false)
+                    ProducerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_goods", x => x.id);
+                    table.PrimaryKey("PK_product", x => x.id);
                     table.ForeignKey(
-                        name: "FK_goods_producers_ProdusersId",
-                        column: x => x.ProdusersId,
-                        principalTable: "producers",
+                        name: "FK_product_producer_ProducerId",
+                        column: x => x.ProducerId,
+                        principalTable: "producer",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "GoodsOrders",
+                name: "ProductOrder",
                 columns: table => new
                 {
-                    Ordersid = table.Column<int>(type: "int", nullable: false),
-                    goodsid = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoodsOrders", x => new { x.Ordersid, x.goodsid });
+                    table.PrimaryKey("PK_ProductOrder", x => new { x.OrderId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_GoodsOrders_goods_goodsid",
-                        column: x => x.goodsid,
-                        principalTable: "goods",
+                        name: "FK_ProductOrder_order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "order",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GoodsOrders_orders_Ordersid",
-                        column: x => x.Ordersid,
-                        principalTable: "orders",
+                        name: "FK_ProductOrder_product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_goods_ProdusersId",
-                table: "goods",
-                column: "ProdusersId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GoodsOrders_goodsid",
-                table: "GoodsOrders",
-                column: "goodsid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_orders_ClientId",
-                table: "orders",
+                name: "IX_order_ClientId",
+                table: "order",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_product_ProducerId",
+                table: "product",
+                column: "ProducerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrder_ProductId",
+                table: "ProductOrder",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GoodsOrders");
+                name: "ProductOrder");
 
             migrationBuilder.DropTable(
-                name: "goods");
+                name: "order");
 
             migrationBuilder.DropTable(
-                name: "orders");
+                name: "product");
 
             migrationBuilder.DropTable(
-                name: "producers");
+                name: "client");
 
             migrationBuilder.DropTable(
-                name: "clients");
+                name: "producer");
         }
     }
 }

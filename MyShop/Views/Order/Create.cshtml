@@ -1,18 +1,13 @@
-﻿@model MyShop.Models.Client
+﻿@* @model MyShop.Models.Order
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <h2> Зареєструватися </h2>
 
-<form asp-action="create" asp-controller="client">
-
+<form asp-action="create" asp-controller="order">
     <p>
-        <label asp-for="id">Id</label><br />
-        <input type="text" asp-for="id" />
-    </p>
-     <p>
-        <label asp-for="name">Ім'я'</label><br />
+        <label asp-for="">Ім'я</label><br />
         <input type="text" asp-for="name" />
     </p>
     <p>
@@ -33,4 +28,4 @@
     </p>
 
 
-</form>
+</form> *@

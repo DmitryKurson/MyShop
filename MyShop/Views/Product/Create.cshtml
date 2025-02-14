@@ -1,4 +1,4 @@
-﻿@model MyShop.Models.Goods
+﻿@model MyShop.Models.Product
 @* 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -6,7 +6,7 @@
 
 <h2> Додати товар </h2>
 
-<form asp-action="create" asp-controller="goods">
+<form asp-action="create" asp-controller="product">
 
     <p>
         <label asp-for="title">Назва</label><br />
@@ -21,26 +21,18 @@
         <input type="text" asp-for="category" />
     </p>
     <p>
-        @*
-        <select asp-for="ProdusersId" asp-items="ViewBag.Producers ?? new SelectList(Enumerable.Empty<SelectListItem>())">
-            <option value="">Оберіть виробника</option>
-        </select>
-        ===========================================
-         <div>
-            <label asp-for="ProdusersId">Виробник</label><br />
-            <select asp-for="ProdusersId" asp-items="ViewBag.Producers">
+        <div>
+            <label asp-for="ProducerId">Виробник</label><br />
+            <select asp-for="ProducerId" asp-items="ViewBag.Producers">
                 <option value="">Оберіть виробника</option>
             </select>
-            <span asp-validation-for="ProdusersId">
-
-            </span>
-        </div>        *@
+        </div>      
     </p>
     <p>
         <input type="submit" value="Зберегти" />
     </p>
 </form>
 
-<form asp-action="index" asp-controller="goods">
+<form asp-action="index" asp-controller="product">
     <input type="submit" value="Назад" />
 </form>

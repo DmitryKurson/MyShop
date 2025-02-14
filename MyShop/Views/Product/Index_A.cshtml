@@ -6,7 +6,7 @@
 <h1>Список товарів</h1>
 <br>
 
-<a asp-controller="goods" asp-action="create">Додати товар</a>
+<a asp-controller="product" asp-action="create">Додати товар</a>
 
 <form method="get">
 </form>
@@ -38,18 +38,18 @@
     </tr>
 
 
-    @foreach (var goods in Model)
+    @foreach (var product in Model)
     {
         <tr>
-            <td>@goods.id</td>
-            <td>@goods.title</td>
-            <td>@goods.description</td>
-            <td>@goods.category</td>
-            <td>@goods.producer</td>
-            <td>@goods.price</td>
-            @if (goods.orders != null)
+            <td>@product.id</td>
+            <td>@product.title</td>
+            <td>@product.description</td>
+            <td>@product.category</td>
+            <td>@product.producer</td>
+            <td>@product.price</td>
+            @if (product.orders != null)
             {
-                @foreach (var order in goods.orders)
+                @foreach (var order in product.orders)
                 {
                     <td>@order.id </td>
                 }
@@ -60,13 +60,13 @@
             }
 
             <td>
-                <form asp-controller="goods" asp-action="edit" asp-route-id="@goods.id">
+                <form asp-controller="product" asp-action="edit" asp-route-id="@product.id">
                     <input type="submit" value="Редагувати"></input>
                 </form>
 
             </td>
             <td>
-                <form asp-controller="goods" asp-action="delete" asp-route-id="@goods.id">
+                <form asp-controller="product" asp-action="delete" asp-route-id="@product.id">
                     <input type="submit" value="Видалити"></input>
                 </form>
             </td>

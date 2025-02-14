@@ -32,7 +32,7 @@ namespace MyShop.Controllers
             return View();
         }
 
-        public IActionResult Goods()
+        public IActionResult Products()
         {
             return View();
         }

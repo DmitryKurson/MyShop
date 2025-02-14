@@ -7,7 +7,7 @@ namespace MyShop.Data
     {
         public DbSet<Client> client { get; set; }
         public DbSet<Producer> producer { get; set; }
-        public DbSet<Goods> goods { get; set; }
+        public DbSet<Product> product { get; set; }
         public DbSet<Order> order { get; set; }
 
         public MyShopDBContext(DbContextOptions<MyShopDBContext> options)
@@ -22,10 +22,10 @@ namespace MyShop.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Producer-Goods
-            modelBuilder.Entity<Goods>()
+            modelBuilder.Entity<Product>()
                 .HasOne(g => g.Producer)
-                .WithMany(p => p.goods)
-                .HasForeignKey(g => g.ProdusersId);
+                .WithMany(p => p.products)
+                .HasForeignKey(g => g.ProducerId);
 
             // Client-Orders
             modelBuilder.Entity<Order>()
@@ -33,10 +33,18 @@ namespace MyShop.Data
                 .WithMany(c => c.orders)
                 .HasForeignKey(o => o.ClientId);
 
-            // Goods-Orders
-            modelBuilder.Entity<Goods>()
-                .HasMany(g => g.Orders)
-                .WithMany(o => o.goods);
+            modelBuilder.Entity<ProductOrder>()
+                .HasKey(go => new { go.OrderId, go.ProductId });
+
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(go => go.Product)
+                .WithMany(g => g.ProductOrders)
+                .HasForeignKey(go => go.ProductId);
+
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(go => go.Order)
+                .WithMany(o => o.ProductOrders)
+                .HasForeignKey(go => go.OrderId);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -8,6 +8,6 @@ namespace MyShop.Models
         public string title { get; set; }
         public string country { get; set; }
         public string phone_number { get; set; }
-        public List<Goods> goods { get; set; }
+        public List<Product> products { get; set; }
     }
 }

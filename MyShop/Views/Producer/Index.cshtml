@@ -39,11 +39,11 @@
             <td>@producer.title</td>
             <td>@producer.country</td>
             <td>@producer.phone_number</td>
-            @if (producer.goods != null)
+            @if (producer.product != null)
             {
-                @foreach (var goods in producer.goods)
+                @foreach (var product in producer.products)
                 {
-                    <td>@goods.id </td>
+                    <td>@product.id </td>
                 }
             }
             else

@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Data;
 using MyShop.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MyShop.Controllers
 {
-    public class GoodsController : Controller
+    public class ProductController : Controller
     {
         MyShopDBContext db;
-        public GoodsController(MyShopDBContext context)
+        public ProductController(MyShopDBContext context)
         {
             db = context;
         }
@@ -21,13 +22,13 @@ namespace MyShop.Controllers
         public async Task<ActionResult> Index_A()
         {
             
-            List<Goods> goods = await db.goods.ToListAsync();
-            return View(goods);
+            List<Product> products = await db.product.ToListAsync();
+            return View(products);
         }
 
         public async Task<ActionResult> Index_U()
         {
-            var goods_by_producer = await db.goods
+            var product_by_producer = await db.product
                 .Include(g => g.Producer)
                 .GroupBy(g => g.Producer)
                 .ToListAsync();
@@ -35,32 +36,35 @@ namespace MyShop.Controllers
 
 
            
-            return View(goods_by_producer);
+            return View(product_by_producer);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Producers = new SelectList(db.producer, "id", "Name");
+            ViewBag.Producers = new SelectList(db.producer, "id", "title");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Goods goods)
+        public async Task<IActionResult> Create(Product product)
         {
+
+            //goods.Orders = new List<GoodsOrders>(); ;
+            //goods.Producer = await db.producer.FindAsync(goods.ProdusersId);
             if (ModelState.IsValid)
             {
-                db.goods.Add(goods);
+                db.product.Add(product);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.Producers = new SelectList(db.producer, "id", "title");
-            return View(goods);
+           
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditPost(Goods goods)
+        public async Task<IActionResult> EditPost(Product product)
         {
-            db.goods.Update(goods);
+            db.product.Update(product);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -70,10 +74,10 @@ namespace MyShop.Controllers
         {
             if (id != null)
             {
-                Goods? goods = await db.goods.FirstOrDefaultAsync(c => c.id == id);
-                if (goods != null)
+                Product? product = await db.product.FirstOrDefaultAsync(c => c.id == id);
+                if (product != null)
                 {
-                    return View(goods);
+                    return View(product);
                 }
             }
             return NotFound();
@@ -86,10 +90,10 @@ namespace MyShop.Controllers
         {
             if (id != null)
             {
-                Goods? goods = await db.goods.FirstOrDefaultAsync(c => c.id == id);
-                if (goods != null)
+                Product? product = await db.product.FirstOrDefaultAsync(c => c.id == id);
+                if (product != null)
                 {
-                    db.goods.Remove(goods);
+                    db.product.Remove(product);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
