@@ -11,7 +11,7 @@ namespace MyShop.Models
         public int price { get; set; }
         public int ProducerId { get; set; }
         public Producer Producer { get; set; }
-        public List<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
+        public List<ProductOrder> ProductOrders { get; set; }
     }
 
 }

@@ -31,11 +31,7 @@ namespace MyShop.Controllers
             var product_by_producer = await db.product
                 .Include(g => g.Producer)
                 .GroupBy(g => g.Producer)
-                .ToListAsync();
-
-
-
-           
+                .ToListAsync();    
             return View(product_by_producer);
         }
 
@@ -49,16 +45,11 @@ namespace MyShop.Controllers
         public async Task<IActionResult> Create(Product product)
         {
 
-            //goods.Orders = new List<GoodsOrders>(); ;
-            //goods.Producer = await db.producer.FindAsync(goods.ProdusersId);
-            if (ModelState.IsValid)
-            {
-                db.product.Add(product);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-           
-            return View();
+            product.ProductOrders = new List<ProductOrder>();
+            product.Producer = await db.producer.FindAsync(product.ProducerId);
+            db.product.Add(product);
+            await db.SaveChangesAsync();
+            return RedirectToAction("index_a");
         }
 
         [HttpPost]
@@ -66,7 +57,7 @@ namespace MyShop.Controllers
         {
             db.product.Update(product);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("index_a");
         }
 
         [HttpPost]
@@ -95,7 +86,7 @@ namespace MyShop.Controllers
                 {
                     db.product.Remove(product);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("index_a");
                 }
             }
             return NotFound();
