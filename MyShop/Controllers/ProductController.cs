@@ -16,9 +16,6 @@ namespace MyShop.Controllers
             db = context;
         }
 
-       
-
-
         public async Task<ActionResult> Index_A()
         {
             
@@ -30,7 +27,7 @@ namespace MyShop.Controllers
         {
             var product_by_producer = await db.product
                 .Include(g => g.Producer)
-                .GroupBy(g => g.Producer)
+                .GroupBy(g => g.Producer.title)
                 .ToListAsync();    
             return View(product_by_producer);
         }
@@ -91,6 +88,5 @@ namespace MyShop.Controllers
             }
             return NotFound();
         }
-
     }
 }
